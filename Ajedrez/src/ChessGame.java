@@ -4,30 +4,35 @@ public class ChessGame {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         GestorJuego gestor = GestorJuego.obtenerInstancia();
-        Pieza[][] board = gestor.obtenerTablero();
+        Tablero tablero = gestor.obtenerTablero();
+
+        System.out.println("Ingrese nombre del jugador blanco:");
+        String nombreBlanco = scanner.nextLine();
+        System.out.println("Ingrese nombre del jugador negro:");
+        String nombreNegro = scanner.nextLine();
+
+        Jugador jugadorBlanco = new Jugador(nombreBlanco, true);
+        Jugador jugadorNegro = new Jugador(nombreNegro, false);
 
         while (true) {
             System.out.println("Menu:");
-            System.out.println("1. Elegir color");
-            System.out.println("2. Jugar");
-            System.out.println("3. Reiniciar");
-            System.out.println("4. Salir");
+            System.out.println("1. Jugar");
+            System.out.println("2. Reiniciar");
+            System.out.println("3. Salir");
             System.out.print("Elige una opción: ");
             int option = scanner.nextInt();
             scanner.nextLine(); // Clear the buffer
 
             switch (option) {
                 case 1:
-                    chooseColor(scanner, gestor);
+                    jugar(scanner, gestor, tablero, jugadorBlanco, jugadorNegro);
                     break;
                 case 2:
-                    play(scanner, gestor, board);
-                    break;
-                case 3:
-                    gestor = GestorJuego.obtenerInstancia();
+                    reiniciarJuego();
+                    tablero = gestor.obtenerTablero(); // Obtener la nueva instancia del tablero
                     System.out.println("El tablero se ha reiniciado.");
                     break;
-                case 4:
+                case 3:
                     System.out.println("Saliendo del juego.");
                     return;
                 default:
@@ -36,28 +41,14 @@ public class ChessGame {
         }
     }
 
-    private static void chooseColor(Scanner scanner, GestorJuego gestor) {
-        System.out.println("Elige tu color:");
-        System.out.println("1. Blanco");
-        System.out.println("2. Negro");
-        System.out.print("Elige una opción: ");
-        int color = scanner.nextInt();
-        scanner.nextLine(); // Clear the buffer
-        boolean esBlanco = color == 1;
-        // Actualizar el turno del gestor
-        if (!esBlanco) {
-            gestor.cambiarTurno();
-        }
-    }
-
-    private static void play(Scanner scanner, GestorJuego gestor, Pieza[][] board) {
+    private static void jugar(Scanner scanner, GestorJuego gestor, Tablero tablero, Jugador jugadorBlanco, Jugador jugadorNegro) {
         while (true) {
-            printBoard(board);
+            printBoard(tablero.obtenerTablero());
             System.out.println("Es el turno de las " + (gestor.esTurnoBlanco() ? "blancas" : "negras"));
-            System.out.print("Ingresa tu movimiento (ej. e2 e4) o 'menu' para volver al menú: ");
+            System.out.print("Ingresa tu movimiento (ej. e2 e4) o '9' para volver al menú: ");
             String move = scanner.nextLine();
 
-            if (move.equals("menu")) {
+            if (move.equals("9")) {
                 break;
             }
 
@@ -75,19 +66,10 @@ public class ChessGame {
                 continue;
             }
 
-            Pieza pieza = board[from[0]][from[1]];
-            if (pieza == null || pieza.esBlanca() != gestor.esTurnoBlanco()) {
-                System.out.println("Movimiento no válido. Inténtalo de nuevo.");
-                continue;
-            }
+            Jugador jugadorActual = gestor.esTurnoBlanco() ? jugadorBlanco : jugadorNegro;
+            jugadorActual.hacerMovimiento(tablero, from, to);
 
-            if (pieza.movimientoValido(from, to, board)) {
-                ComandoMovimiento comando = new MovimientoPieza(board, from, to);
-                comando.ejecutar();
-                gestor.cambiarTurno();
-            } else {
-                System.out.println("Movimiento no válido. Inténtalo de nuevo.");
-            }
+            gestor.cambiarTurno();
         }
     }
 
@@ -114,14 +96,18 @@ public class ChessGame {
                 } else if (pieza instanceof Reina) {
                     System.out.print(pieza.esBlanca() ? "Q " : "q ");
                 } else if (pieza instanceof Torre) {
-                    System.out.print(pieza.esBlanca() ? "T " : "t ");
+                    System.out.print(pieza.esBlanca() ? "R " : "r ");
                 } else if (pieza instanceof Alfil) {
-                    System.out.print(pieza.esBlanca() ? "A " : "a ");
+                    System.out.print(pieza.esBlanca() ? "B " : "b ");
                 } else if (pieza instanceof Caballo) {
-                    System.out.print(pieza.esBlanca() ? "H " : "h ");
+                    System.out.print(pieza.esBlanca() ? "N " : "n ");
                 }
             }
             System.out.println();
         }
+    }
+
+    private static void reiniciarJuego() {
+        GestorJuego.reiniciarInstancia();
     }
 }

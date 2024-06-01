@@ -11,3 +11,4 @@ public abstract class Pieza {
 
     public abstract boolean movimientoValido(int[] from, int[] to, Pieza[][] board);
 }
+

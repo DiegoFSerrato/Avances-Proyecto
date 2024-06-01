@@ -10,3 +10,4 @@ public class Rey extends Pieza {
         return (deltaX <= 1 && deltaY <= 1) && (board[to[0]][to[1]] == null || board[to[0]][to[1]].esBlanca() != this.esBlanca);
     }
 }
+

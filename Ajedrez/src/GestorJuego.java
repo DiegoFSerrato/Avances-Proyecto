@@ -1,10 +1,11 @@
 public class GestorJuego {
     private static GestorJuego instancia;
-    private Pieza[][] board;
+    private Tablero tablero;
     private boolean turnoBlanco;
 
     private GestorJuego() {
-        inicializarTablero();
+        this.tablero = Tablero.obtenerInstancia();
+        this.turnoBlanco = true; // Asegurar que los blancos siempre empiecen
     }
 
     public static GestorJuego obtenerInstancia() {
@@ -14,34 +15,12 @@ public class GestorJuego {
         return instancia;
     }
 
-    private void inicializarTablero() {
-        board = new Pieza[8][8];
-        // Inicializar peones blancos
-        for (int j = 0; j < 8; j++) {
-            board[1][j] = PiezaFactory.crearPieza("Peon", true);
-        }
-        // Inicializar peones negros
-        for (int j = 0; j < 8; j++) {
-            board[6][j] = PiezaFactory.crearPieza("Peon", false);
-        }
-        // Inicializar otras piezas
-        inicializarOtrasPiezas(true, 0);
-        inicializarOtrasPiezas(false, 7);
+    public static void reiniciarInstancia() {
+        instancia = new GestorJuego();
     }
 
-    private void inicializarOtrasPiezas(boolean esBlanca, int fila) {
-        board[fila][0] = PiezaFactory.crearPieza("Torre", esBlanca);
-        board[fila][7] = PiezaFactory.crearPieza("Torre", esBlanca);
-        board[fila][1] = PiezaFactory.crearPieza("Caballo", esBlanca);
-        board[fila][6] = PiezaFactory.crearPieza("Caballo", esBlanca);
-        board[fila][2] = PiezaFactory.crearPieza("Alfil", esBlanca);
-        board[fila][5] = PiezaFactory.crearPieza("Alfil", esBlanca);
-        board[fila][3] = PiezaFactory.crearPieza("Reina", esBlanca);
-        board[fila][4] = PiezaFactory.crearPieza("Rey", esBlanca);
-    }
-
-    public Pieza[][] obtenerTablero() {
-        return board;
+    public Tablero obtenerTablero() {
+        return tablero;
     }
 
     public boolean esTurnoBlanco() {
