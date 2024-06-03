@@ -1,14 +1,13 @@
 public abstract class Pieza {
-    protected boolean esBlanca;
+    protected boolean esBlanco;
 
-    public Pieza(boolean esBlanca) {
-        this.esBlanca = esBlanca;
+    public Pieza(boolean esBlanco) {
+        this.esBlanco = esBlanco;
     }
 
-    public boolean esBlanca() {
-        return esBlanca;
+    public boolean esBlanco() {
+        return esBlanco;
     }
 
     public abstract boolean movimientoValido(int[] from, int[] to, Pieza[][] board);
 }
-

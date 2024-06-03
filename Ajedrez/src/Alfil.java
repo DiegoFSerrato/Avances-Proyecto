@@ -1,6 +1,6 @@
 public class Alfil extends Pieza {
-    public Alfil(boolean esBlanca) {
-        super(esBlanca);
+    public Alfil(boolean esBlanco) {
+        super(esBlanco);
     }
 
     @Override
@@ -26,6 +26,6 @@ public class Alfil extends Pieza {
             x += deltaX;
             y += deltaY;
         }
-        return board[to[0]][to[1]] == null || board[to[0]][to[1]].esBlanca() != this.esBlanca;
+        return board[to[0]][to[1]] == null || board[to[0]][to[1]].esBlanco() != this.esBlanco;
     }
 }

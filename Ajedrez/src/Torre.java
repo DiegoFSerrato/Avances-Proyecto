@@ -1,6 +1,6 @@
 public class Torre extends Pieza {
-    public Torre(boolean esBlanca) {
-        super(esBlanca);
+    public Torre(boolean esBlanco) {
+        super(esBlanco);
     }
 
     @Override
@@ -24,6 +24,6 @@ public class Torre extends Pieza {
             x += deltaX;
             y += deltaY;
         }
-        return board[to[0]][to[1]] == null || board[to[0]][to[1]].esBlanca() != this.esBlanca;
+        return board[to[0]][to[1]] == null || board[to[0]][to[1]].esBlanco() != this.esBlanco;
     }
 }

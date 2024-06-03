@@ -1,18 +1,18 @@
 public class PiezaFactory {
-    public static Pieza crearPieza(String tipo, boolean esBlanca) {
+    public static Pieza crearPieza(String tipo, boolean esBlanco) {
         switch (tipo) {
             case "Peon":
-                return new Peon(esBlanca);
+                return new Peon(esBlanco);
             case "Rey":
-                return new Rey(esBlanca);
+                return new Rey(esBlanco);
             case "Reina":
-                return new Reina(esBlanca);
+                return new Reina(esBlanco);
             case "Torre":
-                return new Torre(esBlanca);
+                return new Torre(esBlanco);
             case "Alfil":
-                return new Alfil(esBlanca);
+                return new Alfil(esBlanco);
             case "Caballo":
-                return new Caballo(esBlanca);
+                return new Caballo(esBlanco);
             default:
                 throw new IllegalArgumentException("Tipo de pieza no soportado.");
         }

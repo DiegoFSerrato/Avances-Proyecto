@@ -30,4 +30,9 @@ public class GestorJuego {
     public void cambiarTurno() {
         turnoBlanco = !turnoBlanco;
     }
+
+    public void reiniciarTablero() {
+        this.tablero.inicializarTablero();
+        this.turnoBlanco = true;
+    }
 }
