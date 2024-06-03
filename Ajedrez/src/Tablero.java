@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Tablero {
     private static Tablero instancia;
     private Pieza[][] board;
@@ -15,15 +17,10 @@ public class Tablero {
 
     public void inicializarTablero() {
         board = new Pieza[8][8];
-        // Inicializar peones blancos
         for (int j = 0; j < 8; j++) {
             board[1][j] = PiezaFactory.crearPieza("Peon", true);
-        }
-        // Inicializar peones negros
-        for (int j = 0; j < 8; j++) {
             board[6][j] = PiezaFactory.crearPieza("Peon", false);
         }
-        // Inicializar otras piezas
         inicializarOtrasPiezas(true, 0);
         inicializarOtrasPiezas(false, 7);
     }
@@ -54,27 +51,38 @@ public class Tablero {
     }
 
     public static void imprimirTablero(Pieza[][] board) {
+        System.out.println("  a b c d e f g h");
         for (int i = 7; i >= 0; i--) {
+            System.out.print((i + 1) + " ");
             for (int j = 0; j < 8; j++) {
                 Pieza pieza = board[i][j];
                 if (pieza == null) {
                     System.out.print(". ");
-                } else if (pieza instanceof Peon) {
-                    System.out.print(pieza.esBlanco() ? "P " : "p ");
-                } else if (pieza instanceof Rey) {
-                    System.out.print(pieza.esBlanco() ? "K " : "k ");
-                } else if (pieza instanceof Reina) {
-                    System.out.print(pieza.esBlanco() ? "Q " : "q ");
-                } else if (pieza instanceof Torre) {
-                    System.out.print(pieza.esBlanco() ? "R " : "r ");
-                } else if (pieza instanceof Alfil) {
-                    System.out.print(pieza.esBlanco() ? "B " : "b ");
-                } else if (pieza instanceof Caballo) {
-                    System.out.print(pieza.esBlanco() ? "N " : "n ");
+                } else {
+                    char representacion = obtenerRepresentacionPieza(pieza);
+                    System.out.print(representacion + " ");
                 }
             }
-            System.out.println();
+            System.out.println((i + 1));
         }
+        System.out.println("  a b c d e f g h");
+    }
+
+    private static char obtenerRepresentacionPieza(Pieza pieza) {
+        if (pieza instanceof Peon) {
+            return pieza.esBlanco() ? 'P' : 'p';
+        } else if (pieza instanceof Rey) {
+            return pieza.esBlanco() ? 'R' : 'r';
+        } else if (pieza instanceof Reina) {
+            return pieza.esBlanco() ? 'D' : 'd';
+        } else if (pieza instanceof Torre) {
+            return pieza.esBlanco() ? 'T' : 't';
+        } else if (pieza instanceof Alfil) {
+            return pieza.esBlanco() ? 'A' : 'a';
+        } else if (pieza instanceof Caballo) {
+            return pieza.esBlanco() ? 'C' : 'c';
+        }
+        return '?';
     }
 
     public boolean estaEnJaque(boolean esBlanco) {

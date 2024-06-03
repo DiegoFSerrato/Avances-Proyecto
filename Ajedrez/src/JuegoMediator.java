@@ -74,6 +74,7 @@ public class JuegoMediator implements Mediator {
 
     private int mostrarMenuJaqueMate() {
         while (true) {
+            MenuManager.obtenerInstancia().limpiarConsola();
             System.out.println("1. Reiniciar partida");
             System.out.println("9. Volver al menú principal");
             System.out.print("Elige una opción: ");

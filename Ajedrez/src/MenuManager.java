@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MenuManager {
@@ -16,6 +17,7 @@ public class MenuManager {
     }
 
     public int mostrarMenuPrincipal() {
+        limpiarConsola();
         System.out.println("Menu:");
         System.out.println("1. Jugar");
         System.out.println("2. Reiniciar");
@@ -27,11 +29,13 @@ public class MenuManager {
     }
 
     public String obtenerMovimiento() {
+        limpiarConsola();
         System.out.print("Ingresa tu movimiento (ej. e2 e4) o '9' para volver al menú: ");
         return scanner.nextLine().trim();
     }
 
     public String obtenerEntrada() {
+        limpiarConsola();
         return scanner.nextLine().trim();
     }
 
@@ -39,5 +43,19 @@ public class MenuManager {
         int option = scanner.nextInt();
         scanner.nextLine(); // Limpiar el buffer después de nextInt()
         return option;
+    }
+
+    public void limpiarConsola() {
+        try {
+            final String os = System.getProperty("os.name");
+            if (os.contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (IOException | InterruptedException e) {
+            // Manejo de excepciones
+            e.printStackTrace();
+        }
     }
 }
