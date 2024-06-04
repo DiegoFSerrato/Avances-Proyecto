@@ -1,3 +1,11 @@
+package mediadores;
+
+import gestion.GestorJuego;
+import gestion.Tablero;
+import gestion.Jugador;
+import piezas.Pieza;
+import view.MenuManager;
+
 public class JuegoMediator implements Mediator {
     private GestorJuego gestor;
     private Tablero tablero;
@@ -35,6 +43,7 @@ public class JuegoMediator implements Mediator {
 
     public void jugar() {
         while (true) {
+            gestor.guardarEstado();
             Tablero.imprimirTablero(tablero.obtenerTablero());
             System.out.println("Es el turno de las " + (gestor.esTurnoBlanco() ? "blancas" : "negras"));
             String move = MenuManager.obtenerInstancia().obtenerMovimiento();

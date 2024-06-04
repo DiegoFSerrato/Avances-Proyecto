@@ -1,3 +1,5 @@
+package piezas;
+
 public class PiezaFactory {
     public static Pieza crearPieza(String tipo, boolean esBlanco) {
         switch (tipo) {
@@ -14,7 +16,7 @@ public class PiezaFactory {
             case "Caballo":
                 return new Caballo(esBlanco);
             default:
-                throw new IllegalArgumentException("Tipo de pieza no soportado.");
+                throw new IllegalArgumentException("Tipo de pieza desconocido: " + tipo);
         }
     }
 }

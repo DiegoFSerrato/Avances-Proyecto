@@ -1,3 +1,7 @@
+package gestion;
+
+import mediadores.Mediator;
+
 public class Jugador {
     private String nombre;
     private boolean esBlanco;
@@ -22,13 +26,8 @@ public class Jugador {
     }
 
     public void hacerMovimiento(Tablero tablero, int[] from, int[] to) {
-        Pieza pieza = tablero.obtenerTablero()[from[0]][from[1]];
-        if (pieza != null && pieza.esBlanco() == this.esBlanco) {
-            if (tablero.moverPieza(from, to)) {
-                mediator.notificar(this, "cambioTurno");
-            } else {
-                mediator.notificar(this, "movimientoInvalido");
-            }
+        if (tablero.moverPieza(from, to)) {
+            mediator.notificar(this, "cambioTurno");
         } else {
             mediator.notificar(this, "movimientoInvalido");
         }

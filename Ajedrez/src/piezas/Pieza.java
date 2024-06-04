@@ -1,3 +1,5 @@
+package piezas;
+
 public abstract class Pieza {
     protected boolean esBlanco;
 

@@ -1,4 +1,7 @@
-import java.util.Arrays;
+package gestion;
+
+import piezas.Pieza;
+import piezas.PiezaFactory;
 
 public class Tablero {
     private static Tablero instancia;
@@ -69,17 +72,17 @@ public class Tablero {
     }
 
     private static char obtenerRepresentacionPieza(Pieza pieza) {
-        if (pieza instanceof Peon) {
+        if (pieza instanceof piezas.Peon) {
             return pieza.esBlanco() ? 'P' : 'p';
-        } else if (pieza instanceof Rey) {
+        } else if (pieza instanceof piezas.Rey) {
             return pieza.esBlanco() ? 'R' : 'r';
-        } else if (pieza instanceof Reina) {
+        } else if (pieza instanceof piezas.Reina) {
             return pieza.esBlanco() ? 'D' : 'd';
-        } else if (pieza instanceof Torre) {
+        } else if (pieza instanceof piezas.Torre) {
             return pieza.esBlanco() ? 'T' : 't';
-        } else if (pieza instanceof Alfil) {
+        } else if (pieza instanceof piezas.Alfil) {
             return pieza.esBlanco() ? 'A' : 'a';
-        } else if (pieza instanceof Caballo) {
+        } else if (pieza instanceof piezas.Caballo) {
             return pieza.esBlanco() ? 'C' : 'c';
         }
         return '?';
@@ -135,11 +138,15 @@ public class Tablero {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 Pieza pieza = board[i][j];
-                if (pieza instanceof Rey && pieza.esBlanco() == esBlanco) {
+                if (pieza instanceof piezas.Rey && pieza.esBlanco() == esBlanco) {
                     return new int[]{i, j};
                 }
             }
         }
         return null;
+    }
+
+    public void setTablero(Pieza[][] nuevoTablero) {
+        this.board = nuevoTablero;
     }
 }

@@ -1,3 +1,5 @@
+package piezas;
+
 public class Rey extends Pieza {
     public Rey(boolean esBlanco) {
         super(esBlanco);

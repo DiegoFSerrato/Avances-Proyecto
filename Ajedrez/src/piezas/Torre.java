@@ -1,3 +1,5 @@
+package piezas;
+
 public class Torre extends Pieza {
     public Torre(boolean esBlanco) {
         super(esBlanco);

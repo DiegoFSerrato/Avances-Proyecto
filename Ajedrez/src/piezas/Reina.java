@@ -1,5 +1,7 @@
-public class Alfil extends Pieza {
-    public Alfil(boolean esBlanco) {
+package piezas;
+
+public class Reina extends Pieza {
+    public Reina(boolean esBlanco) {
         super(esBlanco);
     }
 
@@ -7,7 +9,7 @@ public class Alfil extends Pieza {
     public boolean movimientoValido(int[] from, int[] to, Pieza[][] board) {
         int deltaX = Math.abs(from[0] - to[0]);
         int deltaY = Math.abs(from[1] - to[1]);
-        if (deltaX == deltaY) {
+        if (deltaX == deltaY || from[0] == to[0] || from[1] == to[1]) {
             return caminoLibre(from, to, board);
         }
         return false;

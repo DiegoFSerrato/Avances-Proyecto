@@ -1,11 +1,19 @@
+package gestion;
+
+import piezas.Pieza;
+import java.util.Stack;
+import java.util.Arrays;
+
 public class GestorJuego {
     private static GestorJuego instancia;
     private Tablero tablero;
     private boolean turnoBlanco;
+    private Stack<Pieza[][]> historial;
 
     private GestorJuego() {
         this.tablero = Tablero.obtenerInstancia();
         this.turnoBlanco = true; // Asegurar que los blancos siempre empiecen
+        this.historial = new Stack<>();
     }
 
     public static GestorJuego obtenerInstancia() {
@@ -13,10 +21,6 @@ public class GestorJuego {
             instancia = new GestorJuego();
         }
         return instancia;
-    }
-
-    public static void reiniciarInstancia() {
-        instancia = new GestorJuego();
     }
 
     public Tablero obtenerTablero() {
@@ -34,5 +38,10 @@ public class GestorJuego {
     public void reiniciarTablero() {
         this.tablero.inicializarTablero();
         this.turnoBlanco = true;
+        this.historial.clear(); // Limpiar el historial al reiniciar el tablero
+    }
+
+    public void guardarEstado() {
+
     }
 }

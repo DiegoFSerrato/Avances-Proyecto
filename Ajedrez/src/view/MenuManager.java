@@ -1,3 +1,5 @@
+package view;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -18,6 +20,7 @@ public class MenuManager {
 
     public int mostrarMenuPrincipal() {
         limpiarConsola();
+        System.out.println("=====CHESS GAME=====");
         System.out.println("Menu:");
         System.out.println("1. Jugar");
         System.out.println("2. Reiniciar");
@@ -47,15 +50,9 @@ public class MenuManager {
 
     public void limpiarConsola() {
         try {
-            final String os = System.getProperty("os.name");
-            if (os.contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                Runtime.getRuntime().exec("clear");
-            }
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (IOException | InterruptedException e) {
-            // Manejo de excepciones
-            e.printStackTrace();
+            System.out.println("Error al limpiar la consola: " + e.getMessage());
         }
     }
 }

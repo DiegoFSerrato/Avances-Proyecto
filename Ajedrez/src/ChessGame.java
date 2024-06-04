@@ -1,3 +1,9 @@
+import gestion.GestorJuego;
+import gestion.Tablero;
+import gestion.Jugador;
+import mediadores.JuegoMediator;
+import view.MenuManager;
+
 public class ChessGame {
     public static void main(String[] args) {
         MenuManager menuManager = MenuManager.obtenerInstancia();
